@@ -7,19 +7,19 @@
 <meta name="description" content="Kaipo Wei — MS Robotics student at the University of Michigan focusing on autonomous vehicles and motion planning. Vehicle engineering background, FSAE, ADAS projects.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#EEF1F4;        /* engineering-paper cool gray */
-    --panel:#FFFFFF;
-    --ink:#152238;          /* deep ink navy */
-    --ink-soft:#44526B;
-    --line:#C9D2DC;
-    --accent:#E8720C;       /* test-vehicle safety orange */
-    --accent-soft:#FBE3CE;
+    --paper:#0E1217;        /* near-black, slight blue cast */
+    --panel:#161C24;        /* card surface */
+    --ink:#E9EDF2;          /* primary text */
+    --ink-soft:#98A4B3;     /* secondary text */
+    --line:#28303B;         /* borders */
+    --accent:#58A6FF;       /* azure — lidar blue */
+    --accent-soft:#16273D;
     --mono:'IBM Plex Mono',ui-monospace,monospace;
-    --sans:'IBM Plex Sans',system-ui,sans-serif;
-    --disp:'Chakra Petch',var(--sans);
+    --sans:'Inter',system-ui,sans-serif;
+    --disp:'Inter',var(--sans);
     --maxw:1060px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -43,7 +43,7 @@
   /* ---------- nav ---------- */
   nav{
     position:sticky;top:0;z-index:50;
-    background:rgba(238,241,244,.92);
+    background:rgba(14,18,23,.9);
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
@@ -67,7 +67,7 @@
   h1{
     font-family:var(--disp);font-weight:700;
     font-size:clamp(2.3rem,5.6vw,3.9rem);
-    line-height:1.06;letter-spacing:-.01em;max-width:15ch;
+    line-height:1.06;letter-spacing:-.028em;max-width:15ch;
   }
   h1 em{font-style:normal;color:var(--accent)}
   .hero-sub{
@@ -94,13 +94,18 @@
     color:var(--ink-soft);margin-bottom:10px;
   }
   .sec-tag b{color:var(--accent);font-weight:500}
-  h2{font-family:var(--disp);font-weight:600;font-size:1.9rem;margin-bottom:28px;letter-spacing:-.005em}
+  h2{font-family:var(--disp);font-weight:600;font-size:1.9rem;margin-bottom:28px;letter-spacing:-.018em}
 
   /* about */
   .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:start}
   @media(max-width:820px){.about-grid{grid-template-columns:1fr}}
   .about p+p{margin-top:14px}
   .about strong{font-weight:600}
+  .portrait{
+    width:100%;aspect-ratio:4/5;object-fit:cover;display:block;
+    border:1px solid var(--line);background:var(--panel);
+    margin-bottom:22px;
+  }
   .fact-card{
     background:var(--panel);border:1px solid var(--line);padding:26px;
   }
@@ -122,6 +127,20 @@
   .proj h3{font-family:var(--disp);font-weight:600;font-size:1.16rem;line-height:1.3}
   .proj-tag{font-family:var(--mono);font-size:11.5px;color:var(--accent);white-space:nowrap;letter-spacing:.06em}
   .proj p{color:var(--ink-soft);font-size:.97rem}
+  .proj-img{margin:2px 0 6px}
+  .proj-img img{
+    width:100%;display:block;border:1px solid var(--line);
+    aspect-ratio:16/9;object-fit:cover;background:var(--paper);
+  }
+  .proj-img figcaption{
+    font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);
+    margin-top:6px;letter-spacing:.04em;
+  }
+  .proj ul{
+    color:var(--ink-soft);font-size:.95rem;
+    padding-left:18px;display:grid;gap:5px;
+  }
+  .proj ul strong{color:var(--ink);font-weight:600}
   .metrics{display:flex;gap:26px;flex-wrap:wrap;margin-top:4px}
   .metric .num{font-family:var(--disp);font-weight:700;font-size:1.5rem;color:var(--ink)}
   .metric .lbl{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);letter-spacing:.05em}
@@ -183,15 +202,15 @@
   <div class="traj" aria-hidden="true">
     <!-- motion-planning trajectory: dashed path + waypoints -->
     <svg viewBox="0 0 520 560" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M60 560 C 120 430, 60 340, 180 280 S 420 200, 400 60" stroke="#C9D2DC" stroke-width="2" stroke-dasharray="10 12"/>
-      <path d="M100 560 C 160 430, 100 340, 220 280 S 460 200, 440 60" stroke="#E8720C" stroke-width="2.5" stroke-dasharray="2 14" stroke-linecap="round"/>
-      <circle cx="220" cy="280" r="6" fill="#E8720C"/>
-      <circle cx="220" cy="280" r="12" stroke="#E8720C" stroke-width="1.5" opacity=".4"/>
-      <circle cx="140" cy="430" r="5" fill="#152238"/>
-      <circle cx="440" cy="60" r="6" fill="#152238"/>
-      <circle cx="440" cy="60" r="13" stroke="#152238" stroke-width="1.5" opacity=".3"/>
-      <text x="240" y="272" font-family="IBM Plex Mono" font-size="11" fill="#44526B">waypoint_k</text>
-      <text x="458" y="64" font-family="IBM Plex Mono" font-size="11" fill="#44526B">goal</text>
+      <path d="M60 560 C 120 430, 60 340, 180 280 S 420 200, 400 60" stroke="#28303B" stroke-width="2" stroke-dasharray="10 12"/>
+      <path d="M100 560 C 160 430, 100 340, 220 280 S 460 200, 440 60" stroke="#58A6FF" stroke-width="2.5" stroke-dasharray="2 14" stroke-linecap="round"/>
+      <circle cx="220" cy="280" r="6" fill="#58A6FF"/>
+      <circle cx="220" cy="280" r="12" stroke="#58A6FF" stroke-width="1.5" opacity=".4"/>
+      <circle cx="140" cy="430" r="5" fill="#E9EDF2"/>
+      <circle cx="440" cy="60" r="6" fill="#E9EDF2"/>
+      <circle cx="440" cy="60" r="13" stroke="#E9EDF2" stroke-width="1.5" opacity=".3"/>
+      <text x="240" y="272" font-family="IBM Plex Mono" font-size="11" fill="#98A4B3">waypoint_k</text>
+      <text x="458" y="64" font-family="IBM Plex Mono" font-size="11" fill="#98A4B3">goal</text>
     </svg>
   </div>
   <div class="wrap hero">
@@ -236,13 +255,17 @@
           intersection of vehicle dynamics and autonomy.
         </p>
       </div>
-      <aside class="fact-card">
+      <aside>
+        <img class="portrait" src="assets/profile.jpg" alt="Portrait of Kaipo Wei"
+             onerror="this.style.display='none'">
+        <div class="fact-card">
         <dl>
           <div><dt>Currently</dt><dd>MS Robotics, University of Michigan (2026 – )</dd></div>
           <div><dt>Previously</dt><dd>B.S. Vehicle Engineering, NTUT — GPA 3.6 / 4.0</dd></div>
           <div><dt>Focus</dt><dd>Autonomous vehicles · Motion planning · ADAS</dd></div>
           <div><dt>Hands-on</dt><dd>FSAE suspension &amp; drivetrain · Garage-built scooter mods</dd></div>
         </dl>
+        </div>
       </aside>
     </div>
   </div>
@@ -261,15 +284,23 @@
         </div>
         <p>
           Built two 3D medical-imaging pipelines for cardiac CT: a UNet3D model for
-          whole-heart segmentation and a YOLOv12 detector for aortic-valve localization.
-          Covered the full workflow — data preprocessing, augmentation, training, and
-          post-processing — under competition constraints.
+          whole-heart segmentation and a YOLOv12 detector for aortic-valve localization,
+          covering the full workflow under competition constraints.
         </p>
+        <figure class="proj-img">
+          <img src="assets/aicup.jpg" alt="Cardiac CT segmentation results" onerror="this.parentElement.style.display='none'">
+          <figcaption>FIG. — segmentation output on cardiac CT</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Segmentation:</strong> volumetric UNet3D on cardiac CT — data preprocessing, augmentation, training, and post-processing for whole-heart masks.</li>
+          <li><strong>Detection:</strong> YOLOv12 for aortic-valve localization, tuned for the small-target, low-contrast regime of medical imagery.</li>
+          <li><strong>Takeaway:</strong> end-to-end ownership of a deep-learning pipeline — the same skill set behind camera-based ADAS perception.</li>
+        </ul>
         <div class="metrics">
           <div class="metric"><div class="num">0.744</div><div class="lbl">DICE — UNET3D SEGMENTATION</div></div>
           <div class="metric"><div class="num">0.940</div><div class="lbl">DICE — YOLOV12 VALVE DETECTION</div></div>
         </div>
-        <div class="proj-links"><a href="https://github.com/kaipowei63-ux">Code →</a></div>
+        <div class="proj-links"><a href="https://github.com/YOUR_GITHUB">Code →</a></div>
       </article>
 
       <article class="proj">
@@ -277,12 +308,21 @@
           <h3>Lane Detection Pipeline</h3>
           <span class="proj-tag">OPENCV / ADAS</span>
         </div>
+        <figure class="proj-img">
+          <img src="assets/lane.jpg" alt="Lane detection output overlaid on road footage" onerror="this.parentElement.style.display='none'">
+          <figcaption>FIG. — detected lane overlaid on road footage</figcaption>
+        </figure>
         <p>
-          Classical computer-vision lane detection in OpenCV: camera calibration,
-          perspective transform, gradient &amp; color thresholding, and polynomial lane
-          fitting — the perception building block for lane-keeping systems.
+          Classical computer-vision lane detection built in OpenCV — the perception
+          building block for lane-keeping systems.
         </p>
-        <div class="proj-links"><a href="https://github.com/kaipowei63-ux">Code →</a></div>
+        <ul>
+          <li>Camera calibration &amp; distortion correction</li>
+          <li>Perspective (bird's-eye) transform</li>
+          <li>Gradient &amp; color-space thresholding</li>
+          <li>Sliding-window search &amp; polynomial lane fitting</li>
+        </ul>
+        <div class="proj-links"><a href="https://github.com/YOUR_GITHUB">Code →</a></div>
       </article>
 
       <article class="proj">
@@ -290,6 +330,10 @@
           <h3>FSAE Suspension &amp; Drivetrain</h3>
           <span class="proj-tag">NTUT FORMULA SAE</span>
         </div>
+        <figure class="proj-img">
+          <img src="assets/fsae.jpg" alt="NTUT FSAE race car" onerror="this.parentElement.style.display='none'">
+          <figcaption>FIG. — NTUT Formula SAE car</figcaption>
+        </figure>
         <p>
           One year on the NTUT FSAE team: suspension geometry design and drivetrain
           design-for-manufacture — taking components from CAD through machining to a
@@ -302,6 +346,10 @@
           <h3>FEA Structural &amp; Fatigue Analysis</h3>
           <span class="proj-tag">UNDERGRAD THESIS</span>
         </div>
+        <figure class="proj-img">
+          <img src="assets/fea.jpg" alt="FEA stress analysis visualization" onerror="this.parentElement.style.display='none'">
+          <figcaption>FIG. — stress distribution from FEA</figcaption>
+        </figure>
         <p>
           Undergraduate thesis applying finite-element analysis to structural strength and
           fatigue life — building the simulation discipline behind safe mechanical design.
@@ -313,6 +361,10 @@
           <h3>Vehicle Dynamics Simulation</h3>
           <span class="proj-tag">CARSIM / BIKESIM</span>
         </div>
+        <figure class="proj-img">
+          <img src="assets/carsim.jpg" alt="CarSim vehicle dynamics simulation" onerror="this.parentElement.style.display='none'">
+          <figcaption>FIG. — maneuver simulation in CarSim</figcaption>
+        </figure>
         <p>
           Modeled and analyzed vehicle behavior in CarSim and BikeSim — handling,
           stability, and maneuver simulation that connects mechanical design decisions to
@@ -405,9 +457,9 @@
       I'd love to talk.
     </p>
     <div class="contact-links">
-      <a class="btn primary" href="mailto:kaipowei@umich.edu">Email me</a>
-      <a class="btn" href="https://github.com/kaipowei63-ux">GitHub</a>
-      <a class="btn" href="https://www.linkedin.com/in/https://www.linkedin.com/in/kaipowei-umich/">LinkedIn</a>
+      <a class="btn primary" href="mailto:YOUR_EMAIL@umich.edu">Email me</a>
+      <a class="btn" href="https://github.com/YOUR_GITHUB">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/YOUR_LINKEDIN">LinkedIn</a>
     </div>
   </div>
 </section>
