@@ -91,6 +91,12 @@
   main li{margin:4px 0}
   main li strong{color:var(--text);font-weight:600}
 
+  /* news */
+  .news-row{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+  .news-row:last-child{border-bottom:none}
+  .news-row .d{color:var(--text-soft);white-space:nowrap}
+  @media(max-width:640px){.news-row{grid-template-columns:88px 1fr;gap:10px}}
+
   /* ---------- expandable project entries ---------- */
   .entry{border-bottom:1px solid var(--line)}
   .entry:last-child{border-bottom:none}
@@ -183,7 +189,7 @@
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 9 12 4 2 9l10 5 10-5Z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/></svg>
-        University of Michigan
+        <a href="https://robotics.umich.edu" target="_blank" rel="noopener">University of Michigan</a>
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
@@ -206,14 +212,15 @@
     <section id="about">
       <h1>From vehicle dynamics to autonomous driving</h1>
       <p>
-        I'm a robotics graduate student at the University of Michigan with a vehicle
-        engineering background. I build things that move: FSAE suspension and drivetrain
+        I'm a robotics graduate student at the <a href="https://umich.edu" target="_blank" rel="noopener">University of Michigan</a>
+        with a vehicle engineering background. I build things that move: FSAE suspension and drivetrain
         hardware, FEA-verified structures, and perception pipelines for ADAS. My focus is
         motion planning and autonomy for road vehicles.
       </p>
       <p class="soft">
-        I started on the mechanical side — a B.S. in Vehicle Engineering at National Taipei
-        University of Technology (GPA 3.6/4.0), a year on the NTUT Formula SAE team, and a
+        I started on the mechanical side — a B.S. in <a href="https://ve.ntut.edu.tw/" target="_blank" rel="noopener">Vehicle Engineering</a>
+        at National Taipei University of Technology (GPA 3.6/4.0), a year on the
+        <a href="https://www.ntutracing.com/" target="_blank" rel="noopener">Taipei Tech Racing</a> Formula SAE team, and a
         thesis applying FEA structural and fatigue analysis. Internships at Foxconn's
         commercial EV division and iPE showed me how vehicles get engineered at production
         scale — and how much of the industry's future depends on software. That pulled me
@@ -221,6 +228,24 @@
         vehicle-dynamics simulation in CarSim and BikeSim. Long term, I want to do R&amp;D
         at the intersection of vehicle dynamics and autonomy.
       </p>
+    </section>
+
+    <section id="news">
+      <h2 class="sec">News</h2>
+      <div class="news-row">
+        <div class="d">Aug 2026</div>
+        <div>Moving to Ann Arbor to begin the MS in Robotics at
+          <a href="https://robotics.umich.edu" target="_blank" rel="noopener">Michigan Robotics</a>.</div>
+      </div>
+      <div class="news-row">
+        <div class="d">Spring 2026</div>
+        <div>Admitted to the MS in Robotics program at the University of Michigan.</div>
+      </div>
+      <div class="news-row">
+        <div class="d">2025</div>
+        <div>Competed in AI CUP 2025 — cardiac CT segmentation (UNet3D) and aortic-valve
+          detection (YOLOv12).</div>
+      </div>
     </section>
 
     <section id="projects">
@@ -254,7 +279,10 @@
               <li><strong>Detection:</strong> YOLOv12 for aortic-valve localization, tuned for small, low-contrast targets.</li>
               <li><strong>Takeaway:</strong> end-to-end ownership of a deep-learning pipeline — the same skill set behind camera-based ADAS perception.</li>
             </ul>
-            <div class="entry-links"><a href="https://github.com/kaipowei63-ux">Code</a></div>
+            <div class="entry-links">
+              <a href="projects/aicup.html">Full write-up →</a>
+              <a href="https://github.com/kaipowei63-ux">Code</a>
+            </div>
           </div></div>
         </div>
       </article>
@@ -284,7 +312,10 @@
               <li>Gradient &amp; color-space thresholding</li>
               <li>Sliding-window search &amp; polynomial lane fitting</li>
             </ul>
-            <div class="entry-links"><a href="https://github.com/kaipowei63-ux">Code</a></div>
+            <div class="entry-links">
+              <a href="projects/lane-detection.html">Full write-up →</a>
+              <a href="https://github.com/kaipowei63-ux">Code</a>
+            </div>
           </div></div>
         </div>
       </article>
@@ -309,7 +340,7 @@
               <figcaption>NTUT Formula SAE car</figcaption>
             </figure>
             <p>
-              One year on the NTUT FSAE team: suspension geometry design and drivetrain
+              One year on <a href="https://www.ntutracing.com/" target="_blank" rel="noopener">Taipei Tech Racing</a>, the NTUT FSAE team: suspension geometry design and drivetrain
               design-for-manufacture — taking components from CAD through machining to a
               running race car.
             </p>
