@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaipo Wang — Robotics @ Michigan</title>
+<meta name="description" content="Kaipo Wang — MS Robotics student at the University of Michigan focusing on autonomous vehicles and motion planning. Vehicle engineering background, FSAE, ADAS projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF1F4;        /* engineering-paper cool gray */
+    --panel:#FFFFFF;
+    --ink:#152238;          /* deep ink navy */
+    --ink-soft:#44526B;
+    --line:#C9D2DC;
+    --accent:#E8720C;       /* test-vehicle safety orange */
+    --accent-soft:#FBE3CE;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --sans:'IBM Plex Sans',system-ui,sans-serif;
+    --disp:'Chakra Petch',var(--sans);
+    --maxw:1060px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    font-size:16.5px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--ink);text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(238,241,244,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:.04em}
+  .logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:26px;font-family:var(--mono);font-size:13px}
+  .nav-links a{color:var(--ink-soft)}
+  .nav-links a:hover{color:var(--accent)}
+  @media(max-width:640px){.nav-links{gap:16px;font-size:12px}}
+
+  /* ---------- hero ---------- */
+  header{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero{padding:88px 0 96px;position:relative}
+  .kicker{
+    font-family:var(--mono);font-size:13px;letter-spacing:.12em;
+    color:var(--accent);text-transform:uppercase;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .kicker::before{content:"";display:inline-block;width:26px;height:2px;background:var(--accent)}
+  h1{
+    font-family:var(--disp);font-weight:700;
+    font-size:clamp(2.3rem,5.6vw,3.9rem);
+    line-height:1.06;letter-spacing:-.01em;max-width:15ch;
+  }
+  h1 em{font-style:normal;color:var(--accent)}
+  .hero-sub{
+    margin-top:22px;max-width:56ch;color:var(--ink-soft);font-size:1.07rem;
+  }
+  .hero-cn{font-family:var(--mono);font-size:14px;color:var(--ink-soft);margin-top:10px}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    font-family:var(--mono);font-size:14px;padding:12px 22px;border:1.5px solid var(--ink);
+    display:inline-block;transition:background .15s,color .15s;
+  }
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn.primary{background:var(--ink);color:var(--paper)}
+  .btn.primary:hover{background:var(--accent);border-color:var(--accent)}
+  /* trajectory signature */
+  .traj{position:absolute;inset:0;pointer-events:none;z-index:-1}
+  .traj svg{position:absolute;right:-40px;top:0;height:100%;opacity:.9}
+  @media(max-width:900px){.traj svg{opacity:.28}}
+
+  /* ---------- sections ---------- */
+  section{padding:78px 0;border-bottom:1px solid var(--line)}
+  .sec-tag{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:10px;
+  }
+  .sec-tag b{color:var(--accent);font-weight:500}
+  h2{font-family:var(--disp);font-weight:600;font-size:1.9rem;margin-bottom:28px;letter-spacing:-.005em}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:start}
+  @media(max-width:820px){.about-grid{grid-template-columns:1fr}}
+  .about p+p{margin-top:14px}
+  .about strong{font-weight:600}
+  .fact-card{
+    background:var(--panel);border:1px solid var(--line);padding:26px;
+  }
+  .fact-card dl{display:grid;gap:14px}
+  .fact-card dt{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+  .fact-card dd{font-weight:500;margin-top:2px}
+
+  /* projects */
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:820px){.proj-grid{grid-template-columns:1fr}}
+  .proj{
+    background:var(--panel);border:1px solid var(--line);padding:28px;
+    display:flex;flex-direction:column;gap:12px;position:relative;
+    transition:border-color .15s, transform .15s;
+  }
+  .proj:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .proj.wide{grid-column:1/-1}
+  .proj-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .proj h3{font-family:var(--disp);font-weight:600;font-size:1.16rem;line-height:1.3}
+  .proj-tag{font-family:var(--mono);font-size:11.5px;color:var(--accent);white-space:nowrap;letter-spacing:.06em}
+  .proj p{color:var(--ink-soft);font-size:.97rem}
+  .metrics{display:flex;gap:26px;flex-wrap:wrap;margin-top:4px}
+  .metric .num{font-family:var(--disp);font-weight:700;font-size:1.5rem;color:var(--ink)}
+  .metric .lbl{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);letter-spacing:.05em}
+  .proj-links{margin-top:auto;padding-top:10px;display:flex;gap:18px}
+  .proj-links a{font-family:var(--mono);font-size:13px;color:var(--accent);border-bottom:1px solid transparent}
+  .proj-links a:hover{border-bottom-color:var(--accent)}
+
+  /* experience */
+  .xp{display:grid;gap:0}
+  .xp-item{
+    display:grid;grid-template-columns:190px 1fr;gap:26px;
+    padding:24px 0;border-top:1px solid var(--line);
+  }
+  .xp-item:last-child{border-bottom:1px solid var(--line)}
+  @media(max-width:640px){.xp-item{grid-template-columns:1fr;gap:6px}}
+  .xp-when{font-family:var(--mono);font-size:13px;color:var(--ink-soft);padding-top:3px}
+  .xp-role{font-weight:600}
+  .xp-org{color:var(--accent);font-weight:500}
+  .xp-item p{color:var(--ink-soft);font-size:.96rem;margin-top:6px;max-width:64ch}
+
+  /* skills */
+  .skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:820px){.skill-cols{grid-template-columns:1fr}}
+  .skill-col{background:var(--panel);border:1px solid var(--line);padding:24px}
+  .skill-col h3{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    font-family:var(--mono);font-size:13px;padding:5px 12px;
+    border:1px solid var(--line);background:var(--paper);
+  }
+
+  /* contact / footer */
+  .contact{padding:84px 0 70px;border-bottom:none;text-align:left}
+  .contact h2{max-width:22ch}
+  .contact-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:26px}
+  footer{
+    border-top:1px solid var(--line);padding:26px 0;
+    font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;width:100%}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top">KW<span>.</span></a>
+    <div class="nav-links">
+      <a href="#about">about</a>
+      <a href="#projects">projects</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="traj" aria-hidden="true">
+    <!-- motion-planning trajectory: dashed path + waypoints -->
+    <svg viewBox="0 0 520 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M60 560 C 120 430, 60 340, 180 280 S 420 200, 400 60" stroke="#C9D2DC" stroke-width="2" stroke-dasharray="10 12"/>
+      <path d="M100 560 C 160 430, 100 340, 220 280 S 460 200, 440 60" stroke="#E8720C" stroke-width="2.5" stroke-dasharray="2 14" stroke-linecap="round"/>
+      <circle cx="220" cy="280" r="6" fill="#E8720C"/>
+      <circle cx="220" cy="280" r="12" stroke="#E8720C" stroke-width="1.5" opacity=".4"/>
+      <circle cx="140" cy="430" r="5" fill="#152238"/>
+      <circle cx="440" cy="60" r="6" fill="#152238"/>
+      <circle cx="440" cy="60" r="13" stroke="#152238" stroke-width="1.5" opacity=".3"/>
+      <text x="240" y="272" font-family="IBM Plex Mono" font-size="11" fill="#44526B">waypoint_k</text>
+      <text x="458" y="64" font-family="IBM Plex Mono" font-size="11" fill="#44526B">goal</text>
+    </svg>
+  </div>
+  <div class="wrap hero">
+    <div class="kicker">MS Robotics · University of Michigan</div>
+    <h1>From vehicle dynamics to <em>autonomous driving</em>.</h1>
+    <p class="hero-sub">
+      I'm Kaipo Wang — a robotics graduate student at Michigan with a vehicle engineering
+      background. I build things that move: FSAE suspension and drivetrain hardware,
+      FEA-verified structures, and perception pipelines for ADAS. My focus is motion
+      planning and autonomy for road vehicles.
+    </p>
+    <p class="hero-cn">王凱博 · Ann Arbor, MI ← Taipei, Taiwan</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#projects">View projects</a>
+      <a class="btn" href="cv.pdf">Résumé (PDF)</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-tag"><b>01</b> — about</div>
+    <h2>Mechanical roots, autonomy trajectory</h2>
+    <div class="about-grid">
+      <div class="about">
+        <p>
+          I started on the mechanical side of vehicles: a B.S. in Vehicle Engineering at
+          National Taipei University of Technology, a year on the <strong>NTUT Formula SAE
+          team</strong> designing suspension geometry and manufacturing drivetrain components,
+          and a thesis applying <strong>FEA structural and fatigue analysis</strong>.
+        </p>
+        <p>
+          Internships at <strong>Foxconn's commercial EV division</strong> and <strong>iPE</strong>
+          (wheel product development) showed me how vehicles get engineered at production
+          scale — and how much of the industry's future depends on software. That pulled me
+          toward ADAS: computer-vision lane detection, deep-learning perception, and
+          vehicle-dynamics simulation in CarSim and BikeSim.
+        </p>
+        <p>
+          At Michigan Robotics I'm building the estimation, planning, and control foundation
+          to work on autonomous vehicles end-to-end. Long term, I want to do R&amp;D at the
+          intersection of vehicle dynamics and autonomy.
+        </p>
+      </div>
+      <aside class="fact-card">
+        <dl>
+          <div><dt>Currently</dt><dd>MS Robotics, University of Michigan (2026 – )</dd></div>
+          <div><dt>Previously</dt><dd>B.S. Vehicle Engineering, NTUT — GPA 3.6 / 4.0</dd></div>
+          <div><dt>Focus</dt><dd>Autonomous vehicles · Motion planning · ADAS</dd></div>
+          <div><dt>Hands-on</dt><dd>FSAE suspension &amp; drivetrain · Garage-built scooter mods</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-tag"><b>02</b> — projects</div>
+    <h2>Selected work</h2>
+    <div class="proj-grid">
+
+      <article class="proj wide">
+        <div class="proj-top">
+          <h3>Medical Image Segmentation &amp; Detection — AI CUP 2025</h3>
+          <span class="proj-tag">DEEP LEARNING</span>
+        </div>
+        <p>
+          Built two 3D medical-imaging pipelines for cardiac CT: a UNet3D model for
+          whole-heart segmentation and a YOLOv12 detector for aortic-valve localization.
+          Covered the full workflow — data preprocessing, augmentation, training, and
+          post-processing — under competition constraints.
+        </p>
+        <div class="metrics">
+          <div class="metric"><div class="num">0.744</div><div class="lbl">DICE — UNET3D SEGMENTATION</div></div>
+          <div class="metric"><div class="num">0.940</div><div class="lbl">DICE — YOLOV12 VALVE DETECTION</div></div>
+        </div>
+        <div class="proj-links"><a href="https://github.com/kaipowei63-ux">Code →</a></div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-top">
+          <h3>Lane Detection Pipeline</h3>
+          <span class="proj-tag">OPENCV / ADAS</span>
+        </div>
+        <p>
+          Classical computer-vision lane detection in OpenCV: camera calibration,
+          perspective transform, gradient &amp; color thresholding, and polynomial lane
+          fitting — the perception building block for lane-keeping systems.
+        </p>
+        <div class="proj-links"><a href="https://github.com/kaipowei63-ux">Code →</a></div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-top">
+          <h3>FSAE Suspension &amp; Drivetrain</h3>
+          <span class="proj-tag">NTUT FORMULA SAE</span>
+        </div>
+        <p>
+          One year on the NTUT FSAE team: suspension geometry design and drivetrain
+          design-for-manufacture — taking components from CAD through machining to a
+          running race car.
+        </p>
+      </article>
+
+      <article class="proj">
+        <div class="proj-top">
+          <h3>FEA Structural &amp; Fatigue Analysis</h3>
+          <span class="proj-tag">UNDERGRAD THESIS</span>
+        </div>
+        <p>
+          Undergraduate thesis applying finite-element analysis to structural strength and
+          fatigue life — building the simulation discipline behind safe mechanical design.
+        </p>
+      </article>
+
+      <article class="proj">
+        <div class="proj-top">
+          <h3>Vehicle Dynamics Simulation</h3>
+          <span class="proj-tag">CARSIM / BIKESIM</span>
+        </div>
+        <p>
+          Modeled and analyzed vehicle behavior in CarSim and BikeSim — handling,
+          stability, and maneuver simulation that connects mechanical design decisions to
+          on-road dynamics.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-tag"><b>03</b> — experience</div>
+    <h2>Where I've worked</h2>
+    <div class="xp">
+      <div class="xp-item">
+        <div class="xp-when">INTERNSHIP</div>
+        <div>
+          <div class="xp-role">Engineering Intern — <span class="xp-org">Foxconn, Commercial EV Division</span></div>
+          <p>Worked inside a commercial electric-vehicle program at one of the world's
+          largest manufacturers — exposure to EV development at production scale.</p>
+        </div>
+      </div>
+      <div class="xp-item">
+        <div class="xp-when">INTERNSHIP</div>
+        <div>
+          <div class="xp-role">Product Development Intern — <span class="xp-org">iPE (Wheels)</span></div>
+          <p>Wheel product development and production-line optimization; contributed to a
+          <strong>25% production capacity improvement</strong>.</p>
+        </div>
+      </div>
+      <div class="xp-item">
+        <div class="xp-when">APPRENTICESHIP</div>
+        <div>
+          <div class="xp-role">Automotive Repair Apprentice</div>
+          <p>Hands-on diagnosis and repair — the shop-floor intuition behind everything I
+          design. I still run a small scooter-modification workshop on the side.</p>
+        </div>
+      </div>
+      <div class="xp-item">
+        <div class="xp-when">TEACHING</div>
+        <div>
+          <div class="xp-role">Mathematics Tutor — 3 years</div>
+          <p>Long-term one-on-one tutoring; learned to break hard concepts into steps
+          people can actually follow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-tag"><b>04</b> — toolbox</div>
+    <h2>Skills</h2>
+    <div class="skill-cols">
+      <div class="skill-col">
+        <h3>Software</h3>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">C++</span>
+          <span class="chip">OpenCV</span><span class="chip">PyTorch</span>
+          <span class="chip">Git</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Simulation &amp; Analysis</h3>
+        <div class="chips">
+          <span class="chip">CarSim</span><span class="chip">BikeSim</span>
+          <span class="chip">FEA</span><span class="chip">CAD</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Domains</h3>
+        <div class="chips">
+          <span class="chip">Vehicle dynamics</span><span class="chip">ADAS</span>
+          <span class="chip">Motion planning</span><span class="chip">Suspension design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="sec-tag"><b>05</b> — contact</div>
+    <h2>Open to ADAS / autonomy internships for Summer 2027.</h2>
+    <p style="color:var(--ink-soft);max-width:58ch">
+      If you're working on autonomous vehicles, vehicle dynamics, or motion planning,
+      I'd love to talk.
+    </p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:kaipowei@umich.edu">Email me</a>
+      <a class="btn" href="https://github.com/kaipowei63-ux">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/https://www.linkedin.com/in/kaipowei-umich/">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Kaipo Wang (王凱博)</span>
+    <span>Ann Arbor, Michigan</span>
+  </div>
+</footer>
+
+</body>
+</html>
