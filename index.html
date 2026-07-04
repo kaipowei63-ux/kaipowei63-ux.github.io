@@ -10,18 +10,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0E1217;          /* near-black background */
-    --bg-soft:#151B22;     /* subtle surface */
-    --text:#E9EDF2;        /* primary text */
-    --text-soft:#9AA6B4;   /* secondary text */
-    --line:#262E38;        /* hairline dividers */
-    --link:#58A6FF;        /* link blue */
+    --bg:#0E1217;
+    --bg-soft:#151B22;
+    --text:#E9EDF2;
+    --text-soft:#9AA6B4;
+    --line:#262E38;
+    --link:#58A6FF;
     --sans:'Inter',system-ui,sans-serif;
     --maxw:1080px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition:none!important}
+  }
   body{
     background:var(--bg);color:var(--text);
     font-family:var(--sans);font-size:16.5px;line-height:1.65;
@@ -78,23 +81,47 @@
   /* ---------- main content ---------- */
   main{min-width:0}
   h1{font-size:1.75rem;font-weight:700;letter-spacing:-.015em;line-height:1.3;margin-bottom:16px}
-  main section{margin-bottom:8px}
   main h2.sec{
     font-size:1.35rem;font-weight:700;letter-spacing:-.01em;
     margin:44px 0 6px;padding-bottom:10px;border-bottom:1px solid var(--line);
   }
   main p{margin:12px 0;color:var(--text)}
-  main p.soft, .entry p{color:var(--text-soft)}
+  main p.soft{color:var(--text-soft)}
   main ul{margin:10px 0 10px 22px;color:var(--text-soft)}
   main li{margin:4px 0}
   main li strong{color:var(--text);font-weight:600}
 
-  /* entries (projects & experience) */
-  .entry{padding:22px 0;border-bottom:1px solid var(--line)}
+  /* ---------- expandable project entries ---------- */
+  .entry{border-bottom:1px solid var(--line)}
   .entry:last-child{border-bottom:none}
+  .entry-toggle{
+    width:100%;padding:20px 10px;margin:0 -10px;
+    background:none;border:none;cursor:pointer;text-align:left;
+    color:inherit;font:inherit;border-radius:6px;
+    transition:background-color .18s ease;
+  }
+  .entry-toggle:hover{background:var(--bg-soft)}
+  .entry-toggle:focus-visible{outline:2px solid var(--link);outline-offset:-2px}
   .entry-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
-  .entry h3{font-size:1.08rem;font-weight:600}
-  .entry .meta{font-size:.85rem;color:var(--text-soft);white-space:nowrap}
+  .entry-head h3{font-size:1.08rem;font-weight:600;color:var(--text)}
+  .entry-head .meta{font-size:.85rem;color:var(--text-soft);white-space:nowrap;display:flex;align-items:center;gap:8px}
+  .chev{
+    width:14px;height:14px;flex:none;stroke:var(--text-soft);
+    transition:transform .3s ease, stroke .18s ease;
+  }
+  .entry-toggle:hover .chev{stroke:var(--link)}
+  .entry.open .chev{transform:rotate(180deg)}
+  .entry-summary{margin-top:8px;color:var(--text-soft);font-size:.97rem}
+
+  .entry-detail{
+    display:grid;grid-template-rows:0fr;
+    transition:grid-template-rows .38s ease;
+  }
+  .entry.open .entry-detail{grid-template-rows:1fr}
+  .entry-detail-inner{overflow:hidden;min-height:0;padding:0 10px}
+  .entry-detail-body{padding:2px 0 24px}
+  .entry-detail-body p{color:var(--text-soft)}
+
   .entry-img{margin:14px 0 4px}
   .entry-img img{
     width:100%;max-width:640px;display:block;border:1px solid var(--line);
@@ -104,7 +131,13 @@
   .metrics{display:flex;gap:34px;flex-wrap:wrap;margin:12px 0 2px}
   .metric .num{font-size:1.45rem;font-weight:700;letter-spacing:-.01em}
   .metric .lbl{font-size:.78rem;color:var(--text-soft);letter-spacing:.04em;text-transform:uppercase}
-  .entry-links{margin-top:10px;font-size:.92rem;display:flex;gap:18px}
+  .entry-links{margin-top:12px;font-size:.92rem;display:flex;gap:18px}
+
+  /* experience (simple, non-expandable) */
+  .xentry{padding:22px 0;border-bottom:1px solid var(--line)}
+  .xentry:last-child{border-bottom:none}
+  .xentry .entry-head h3{font-size:1.05rem}
+  .xentry p{color:var(--text-soft);margin:8px 0 0}
 
   /* skills */
   .skill-row{padding:10px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:170px 1fr;gap:16px;font-size:.95rem}
@@ -154,15 +187,15 @@
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-        <a href="mailto:kaipowei@umich.edu">Email</a>
+        <a href="mailto:YOUR_EMAIL@umich.edu">Email</a>
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-        <a href="https://github.com/kaipowei63-ux">GitHub</a>
+        <a href="https://github.com/YOUR_GITHUB">GitHub</a>
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        <a href="https://www.linkedin.com/in/kaipowei-umich/">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN">LinkedIn</a>
       </li>
     </ul>
   </aside>
@@ -191,108 +224,157 @@
     </section>
 
     <section id="projects">
-      <h2 class="sec">Projects</h2>
+      <h2 class="sec">Projects <span style="font-size:.8rem;font-weight:400;color:var(--text-soft)">— click to expand</span></h2>
 
-      <article class="entry">
-        <div class="entry-head">
-          <h3>Medical Image Segmentation &amp; Detection — AI CUP 2025</h3>
-          <span class="meta">Deep learning</span>
+      <article class="entry open">
+        <button class="entry-toggle" aria-expanded="true">
+          <div class="entry-head">
+            <h3>Medical Image Segmentation &amp; Detection — AI CUP 2025</h3>
+            <span class="meta">Deep learning
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </div>
+          <p class="entry-summary">
+            Two 3D medical-imaging pipelines for cardiac CT — UNet3D whole-heart
+            segmentation and YOLOv12 aortic-valve detection.
+          </p>
+        </button>
+        <div class="entry-detail">
+          <div class="entry-detail-inner"><div class="entry-detail-body">
+            <figure class="entry-img">
+              <img src="assets/aicup.jpg" alt="Cardiac CT segmentation results" onerror="this.parentElement.style.display='none'">
+              <figcaption>Segmentation output on cardiac CT</figcaption>
+            </figure>
+            <div class="metrics">
+              <div class="metric"><div class="num">0.744</div><div class="lbl">Dice — UNet3D segmentation</div></div>
+              <div class="metric"><div class="num">0.940</div><div class="lbl">Dice — YOLOv12 valve detection</div></div>
+            </div>
+            <ul>
+              <li><strong>Segmentation:</strong> volumetric UNet3D on cardiac CT — preprocessing, augmentation, training, and post-processing for whole-heart masks.</li>
+              <li><strong>Detection:</strong> YOLOv12 for aortic-valve localization, tuned for small, low-contrast targets.</li>
+              <li><strong>Takeaway:</strong> end-to-end ownership of a deep-learning pipeline — the same skill set behind camera-based ADAS perception.</li>
+            </ul>
+            <div class="entry-links"><a href="https://github.com/YOUR_GITHUB">Code</a></div>
+          </div></div>
         </div>
-        <p>
-          Two 3D medical-imaging pipelines for cardiac CT: a UNet3D model for whole-heart
-          segmentation and a YOLOv12 detector for aortic-valve localization, covering the
-          full workflow under competition constraints.
-        </p>
-        <figure class="entry-img">
-          <img src="assets/aicup.jpg" alt="Cardiac CT segmentation results" onerror="this.parentElement.style.display='none'">
-          <figcaption>Segmentation output on cardiac CT</figcaption>
-        </figure>
-        <div class="metrics">
-          <div class="metric"><div class="num">0.744</div><div class="lbl">Dice — UNet3D segmentation</div></div>
-          <div class="metric"><div class="num">0.940</div><div class="lbl">Dice — YOLOv12 valve detection</div></div>
-        </div>
-        <ul>
-          <li><strong>Segmentation:</strong> volumetric UNet3D on cardiac CT — preprocessing, augmentation, training, and post-processing for whole-heart masks.</li>
-          <li><strong>Detection:</strong> YOLOv12 for aortic-valve localization, tuned for small, low-contrast targets.</li>
-          <li><strong>Takeaway:</strong> end-to-end ownership of a deep-learning pipeline — the same skill set behind camera-based ADAS perception.</li>
-        </ul>
-        <div class="entry-links"><a href="https://github.com/kaipowei63-ux">Code</a></div>
       </article>
 
       <article class="entry">
-        <div class="entry-head">
-          <h3>Lane Detection Pipeline</h3>
-          <span class="meta">OpenCV / ADAS</span>
+        <button class="entry-toggle" aria-expanded="false">
+          <div class="entry-head">
+            <h3>Lane Detection Pipeline</h3>
+            <span class="meta">OpenCV / ADAS
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </div>
+          <p class="entry-summary">
+            Classical computer-vision lane detection built in OpenCV — the perception
+            building block for lane-keeping systems.
+          </p>
+        </button>
+        <div class="entry-detail">
+          <div class="entry-detail-inner"><div class="entry-detail-body">
+            <figure class="entry-img">
+              <img src="assets/lane.jpg" alt="Lane detection output overlaid on road footage" onerror="this.parentElement.style.display='none'">
+              <figcaption>Detected lane overlaid on road footage</figcaption>
+            </figure>
+            <ul>
+              <li>Camera calibration &amp; distortion correction</li>
+              <li>Perspective (bird's-eye) transform</li>
+              <li>Gradient &amp; color-space thresholding</li>
+              <li>Sliding-window search &amp; polynomial lane fitting</li>
+            </ul>
+            <div class="entry-links"><a href="https://github.com/YOUR_GITHUB">Code</a></div>
+          </div></div>
         </div>
-        <p>
-          Classical computer-vision lane detection built in OpenCV — the perception
-          building block for lane-keeping systems.
-        </p>
-        <figure class="entry-img">
-          <img src="assets/lane.jpg" alt="Lane detection output overlaid on road footage" onerror="this.parentElement.style.display='none'">
-          <figcaption>Detected lane overlaid on road footage</figcaption>
-        </figure>
-        <ul>
-          <li>Camera calibration &amp; distortion correction</li>
-          <li>Perspective (bird's-eye) transform</li>
-          <li>Gradient &amp; color-space thresholding</li>
-          <li>Sliding-window search &amp; polynomial lane fitting</li>
-        </ul>
-        <div class="entry-links"><a href="https://github.com/kaipowei63-ux">Code</a></div>
       </article>
 
       <article class="entry">
-        <div class="entry-head">
-          <h3>FSAE Suspension &amp; Drivetrain</h3>
-          <span class="meta">NTUT Formula SAE</span>
+        <button class="entry-toggle" aria-expanded="false">
+          <div class="entry-head">
+            <h3>FSAE Suspension &amp; Drivetrain</h3>
+            <span class="meta">NTUT Formula SAE
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </div>
+          <p class="entry-summary">
+            Suspension geometry design and drivetrain design-for-manufacture on the NTUT
+            FSAE team.
+          </p>
+        </button>
+        <div class="entry-detail">
+          <div class="entry-detail-inner"><div class="entry-detail-body">
+            <figure class="entry-img">
+              <img src="assets/fsae.jpg" alt="NTUT FSAE race car" onerror="this.parentElement.style.display='none'">
+              <figcaption>NTUT Formula SAE car</figcaption>
+            </figure>
+            <p>
+              One year on the NTUT FSAE team: suspension geometry design and drivetrain
+              design-for-manufacture — taking components from CAD through machining to a
+              running race car.
+            </p>
+          </div></div>
         </div>
-        <p>
-          One year on the NTUT FSAE team: suspension geometry design and drivetrain
-          design-for-manufacture — taking components from CAD through machining to a
-          running race car.
-        </p>
-        <figure class="entry-img">
-          <img src="assets/fsae.jpg" alt="NTUT FSAE race car" onerror="this.parentElement.style.display='none'">
-          <figcaption>NTUT Formula SAE car</figcaption>
-        </figure>
       </article>
 
       <article class="entry">
-        <div class="entry-head">
-          <h3>FEA Structural &amp; Fatigue Analysis</h3>
-          <span class="meta">Undergraduate thesis</span>
+        <button class="entry-toggle" aria-expanded="false">
+          <div class="entry-head">
+            <h3>FEA Structural &amp; Fatigue Analysis</h3>
+            <span class="meta">Undergraduate thesis
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </div>
+          <p class="entry-summary">
+            Finite-element analysis of structural strength and fatigue life.
+          </p>
+        </button>
+        <div class="entry-detail">
+          <div class="entry-detail-inner"><div class="entry-detail-body">
+            <figure class="entry-img">
+              <img src="assets/fea.jpg" alt="FEA stress analysis visualization" onerror="this.parentElement.style.display='none'">
+              <figcaption>Stress distribution from FEA</figcaption>
+            </figure>
+            <p>
+              Undergraduate thesis applying finite-element analysis to structural strength and
+              fatigue life — the simulation discipline behind safe mechanical design.
+            </p>
+          </div></div>
         </div>
-        <p>
-          Undergraduate thesis applying finite-element analysis to structural strength and
-          fatigue life — the simulation discipline behind safe mechanical design.
-        </p>
-        <figure class="entry-img">
-          <img src="assets/fea.jpg" alt="FEA stress analysis visualization" onerror="this.parentElement.style.display='none'">
-          <figcaption>Stress distribution from FEA</figcaption>
-        </figure>
       </article>
 
       <article class="entry">
-        <div class="entry-head">
-          <h3>Vehicle Dynamics Simulation</h3>
-          <span class="meta">CarSim / BikeSim</span>
+        <button class="entry-toggle" aria-expanded="false">
+          <div class="entry-head">
+            <h3>Vehicle Dynamics Simulation</h3>
+            <span class="meta">CarSim / BikeSim
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </div>
+          <p class="entry-summary">
+            Handling, stability, and maneuver simulation in CarSim and BikeSim.
+          </p>
+        </button>
+        <div class="entry-detail">
+          <div class="entry-detail-inner"><div class="entry-detail-body">
+            <figure class="entry-img">
+              <img src="assets/carsim.jpg" alt="CarSim vehicle dynamics simulation" onerror="this.parentElement.style.display='none'">
+              <figcaption>Maneuver simulation in CarSim</figcaption>
+            </figure>
+            <p>
+              Modeled and analyzed vehicle behavior in CarSim and BikeSim — handling,
+              stability, and maneuver simulation that connects mechanical design decisions to
+              on-road dynamics.
+            </p>
+          </div></div>
         </div>
-        <p>
-          Modeled and analyzed vehicle behavior in CarSim and BikeSim — handling,
-          stability, and maneuver simulation that connects mechanical design decisions to
-          on-road dynamics.
-        </p>
-        <figure class="entry-img">
-          <img src="assets/carsim.jpg" alt="CarSim vehicle dynamics simulation" onerror="this.parentElement.style.display='none'">
-          <figcaption>Maneuver simulation in CarSim</figcaption>
-        </figure>
       </article>
     </section>
 
     <section id="experience">
       <h2 class="sec">Experience</h2>
 
-      <article class="entry">
+      <article class="xentry">
         <div class="entry-head">
           <h3>Engineering Intern — Foxconn, Commercial EV Division</h3>
           <span class="meta">Internship</span>
@@ -301,7 +383,7 @@
         largest manufacturers — exposure to EV development at production scale.</p>
       </article>
 
-      <article class="entry">
+      <article class="xentry">
         <div class="entry-head">
           <h3>Product Development Intern — iPE (Wheels)</h3>
           <span class="meta">Internship</span>
@@ -310,7 +392,7 @@
         25% production capacity improvement.</p>
       </article>
 
-      <article class="entry">
+      <article class="xentry">
         <div class="entry-head">
           <h3>Automotive Repair Apprentice</h3>
           <span class="meta">Apprenticeship</span>
@@ -319,7 +401,7 @@
         design. I still run a small scooter-modification workshop on the side.</p>
       </article>
 
-      <article class="entry">
+      <article class="xentry">
         <div class="entry-head">
           <h3>Mathematics Tutor</h3>
           <span class="meta">3 years</span>
@@ -341,9 +423,9 @@
       <p>Open to ADAS / autonomy internships for Summer 2027. If you're working on
       autonomous vehicles, vehicle dynamics, or motion planning, I'd love to talk.</p>
       <p>
-        <a href="mailto:kaipowei@umich.edu">kaipowei@umich.edu</a> ·
-        <a href="https://github.com/kaipowei63-ux">GitHub</a> ·
-        <a href="https://www.linkedin.com/in/kaipowei-umich/">LinkedIn</a>
+        <a href="mailto:YOUR_EMAIL@umich.edu">YOUR_EMAIL@umich.edu</a> ·
+        <a href="https://github.com/YOUR_GITHUB">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN">LinkedIn</a>
       </p>
     </section>
 
@@ -356,6 +438,16 @@
     <span>Ann Arbor, Michigan</span>
   </div>
 </footer>
+
+<script>
+  document.querySelectorAll('.entry-toggle').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var entry = btn.closest('.entry');
+      var isOpen = entry.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+</script>
 
 </body>
 </html>
