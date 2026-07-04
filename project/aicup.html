@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Image Segmentation &amp; Detection (AI CUP 2025) — Kaipo Wei</title>
+<meta name="description" content="UNet3D cardiac segmentation and YOLOv12 aortic-valve detection pipelines built by Kaipo Wei for AI CUP 2025.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E1217;
+    --bg-soft:#151B22;
+    --text:#E9EDF2;
+    --text-soft:#9AA6B4;
+    --line:#262E38;
+    --link:#58A6FF;
+    --sans:'Inter',system-ui,sans-serif;
+    --maxw:760px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:var(--sans);font-size:16.5px;line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--link);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:2px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,18,23,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .site-title{font-weight:600;font-size:16px;color:var(--text)}
+  .site-title:hover{text-decoration:none;color:var(--link)}
+  .back{font-size:14.5px}
+
+  article{padding:52px 0 80px}
+  .meta{font-size:.85rem;color:var(--text-soft);letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+  h1{font-size:2rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;margin-bottom:14px}
+  .lead{color:var(--text-soft);font-size:1.05rem;margin-bottom:8px}
+  h2{font-size:1.3rem;font-weight:700;letter-spacing:-.01em;margin:40px 0 6px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  p{margin:12px 0}
+  ul,ol{margin:10px 0 10px 22px;color:var(--text-soft)}
+  li{margin:5px 0}
+  li strong{color:var(--text);font-weight:600}
+  figure{margin:22px 0}
+  figure img{
+    width:100%;display:block;border:1px solid var(--line);
+    border-radius:4px;background:var(--bg-soft);
+  }
+  figcaption{font-size:.82rem;color:var(--text-soft);margin-top:7px}
+  .metrics{display:flex;gap:34px;flex-wrap:wrap;margin:18px 0 4px}
+  .metric .num{font-size:1.6rem;font-weight:700;letter-spacing:-.01em}
+  .metric .lbl{font-size:.78rem;color:var(--text-soft);letter-spacing:.04em;text-transform:uppercase}
+  .links{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:20px;font-size:.95rem}
+  footer{border-top:1px solid var(--line);padding:22px 0;font-size:.85rem;color:var(--text-soft)}
+  footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="site-title" href="../index.html">Kaipo Wei</a>
+    <a class="back" href="../index.html#projects">← Back to projects</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <article>
+    <div class="meta">Project · Deep learning · AI CUP 2025</div>
+    <h1>Medical Image Segmentation &amp; Detection</h1>
+    <p class="lead">
+      Two 3D medical-imaging pipelines for cardiac CT, built for the AI CUP 2025
+      competition: UNet3D whole-heart segmentation and YOLOv12 aortic-valve detection.
+    </p>
+
+    <div class="metrics">
+      <div class="metric"><div class="num">0.744</div><div class="lbl">Dice — UNet3D segmentation</div></div>
+      <div class="metric"><div class="num">0.940</div><div class="lbl">Dice — YOLOv12 valve detection</div></div>
+    </div>
+
+    <figure>
+      <img src="../assets/aicup.jpg" alt="Cardiac CT segmentation results"
+           onerror="this.parentElement.style.display='none'">
+      <figcaption>Segmentation output on cardiac CT</figcaption>
+    </figure>
+
+    <h2>Overview</h2>
+    <p>
+      這裡寫背景:AI CUP 是什麼比賽、題目要求什麼、為什麼一個車輛工程背景的人
+      要挑戰醫學影像(這其實是好故事——展現你跨域學習 deep learning 的能力,
+      而且 3D 影像處理跟自駕的 lidar/體素處理概念相通)。建議 2 段。
+      (把中文提示替換成你的英文內容)
+    </p>
+
+    <h2>Segmentation — UNet3D</h2>
+    <p>這裡寫分割任務的技術細節,例如:</p>
+    <ul>
+      <li><strong>Data:</strong> 資料集規模、CT 體積的維度、標註格式</li>
+      <li><strong>Preprocessing:</strong> resampling、intensity normalization、patch 切法</li>
+      <li><strong>Augmentation:</strong> 用了哪些增強方法、為什麼</li>
+      <li><strong>Training:</strong> loss function(Dice loss? 混合?)、optimizer、訓練資源與時間</li>
+      <li><strong>Post-processing:</strong> 例如 connected-component filtering</li>
+    </ul>
+
+    <h2>Detection — YOLOv12</h2>
+    <p>
+      這裡寫偵測任務:主動脈瓣是小目標、低對比,你怎麼調整模型或訓練策略來處理
+      (anchor 設定? 輸入解析度? 資料切片策略?)。Dice 0.940 是很強的數字,
+      值得解釋你做對了什麼。
+    </p>
+
+    <figure>
+      <img src="../assets/aicup-detection.jpg" alt="Aortic valve detection results"
+           onerror="this.parentElement.style.display='none'">
+      <figcaption>YOLOv12 aortic-valve detection(想放更多圖就複製這個 figure 區塊)</figcaption>
+    </figure>
+
+    <h2>Challenges &amp; lessons</h2>
+    <p>
+      這裡寫遇到的困難跟解法:例如訓練不穩定、class imbalance、GPU 記憶體限制
+      怎麼處理。有一兩個「卡關 → 分析 → 解決」的故事,比單純列成果更能展現
+      工程能力。
+    </p>
+
+    <h2>Why this matters for autonomy</h2>
+    <p>
+      一小段收尾,把這個專案連回你的主軸:volumetric data、小目標偵測、
+      不完美標註下的訓練——這些都是 AV perception 會遇到的同型問題。
+    </p>
+
+    <div class="links">
+      <a href="https://github.com/YOUR_GITHUB">View code on GitHub</a>
+    </div>
+  </article>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Kaipo Wei (魏開柏)</span>
+    <span><a href="../index.html">kaipowei.github.io</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
